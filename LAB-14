@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<form method="post" action="">
+  <h3>Select Your Hobbies:</h3>
+
+  <input type="checkbox" name="hobbies[]" value="Reading"> Reading<br>
+  <input type="checkbox" name="hobbies[]" value="Gaming"> Gaming<br>
+  <input type="checkbox" name="hobbies[]" value="Sports"> Sports<br>
+  <input type="checkbox" name="hobbies[]" value="Music"> Music<br><br>
+
+  <input type="submit">
+</form>
+
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+  if (!empty($_POST['hobbies'])) {
+
+    echo "Selected Hobbies:<br>";
+
+    foreach ($_POST['hobbies'] as $hobby) {
+      echo "- " . htmlspecialchars($hobby) . "<br>";
+    }
+
+  } else {
+    echo "No hobbies selected!";
+  }
+}
+?>
+
+</body>
+</html>
