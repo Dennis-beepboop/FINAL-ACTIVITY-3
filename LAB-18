@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h3>GET Method Form</h3>
+<form method="get" action="">
+  Name: <input type="text" name="name"><br><br>
+  <input type="submit" value="Submit GET">
+</form>
+
+<?php
+if (isset($_GET['name'])) {
+  echo "GET Output: Hello " . htmlspecialchars($_GET['name']) . "<br>";
+  echo "URL shows the data above.<br><br>";
+}
+?>
+
+<hr>
+
+<h3>POST Method Form</h3>
+<form method="post" action="">
+  Name: <input type="text" name="pname"><br><br>
+  <input type="submit" value="Submit POST">
+</form>
+
+<?php
+if (isset($_POST['pname'])) {
+  echo "POST Output: Hello " . htmlspecialchars($_POST['pname']) . "<br>";
+  echo "URL does NOT show the data.";
+}
+?>
+
+</body>
+</html>
