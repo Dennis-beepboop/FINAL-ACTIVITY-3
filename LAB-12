@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<form method="post" action="">
+  Name:
+  <input type="text" name="name" value="<?php echo $_POST['name'] ?? ''; ?>"><br><br>
+
+  Email:
+  <input type="text" name="email" value="<?php echo $_POST['email'] ?? ''; ?>"><br><br>
+
+  Gender:<br>
+  <input type="radio" name="gender" value="Male"
+    <?php if (isset($_POST['gender']) && $_POST['gender'] == "Male") echo "checked"; ?>>
+  Male<br>
+
+  <input type="radio" name="gender" value="Female"
+    <?php if (isset($_POST['gender']) && $_POST['gender'] == "Female") echo "checked"; ?>>
+  Female<br><br>
+
+  Course:
+  <select name="course">
+    <option value="">Select Course</option>
+    <option value="BSIT" <?php if (($_POST['course'] ?? '') == "BSIT") echo "selected"; ?>>BSIT</option>
+    <option value="BSOA" <?php if (($_POST['course'] ?? '') == "BSOA") echo "selected"; ?>>BSOA</option>
+    <option value="CCS" <?php if (($_POST['course'] ?? '') == "CCS") echo "selected"; ?>>CCS</option>
+    <option value="AHRT" <?php if (($_POST['course'] ?? '') == "AHRT") echo "selected"; ?>>AHRT</option>
+  </select><br><br>
+
+  Message:<br>
+  <textarea name="message" rows="5" cols="30"><?php echo $_POST['message'] ?? ''; ?></textarea><br><br>
+
+  <input type="submit">
+</form>
+
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+  $name = htmlspecialchars($_POST['name'] ?? '');
+  $email = htmlspecialchars($_POST['email'] ?? '');
+  $gender = $_POST['gender'] ?? '';
+  $course = $_POST['course'] ?? '';
+  $message = htmlspecialchars($_POST['message'] ?? '');
+
+  if (empty($name) || empty($email) || empty($gender) || empty($course) || empty($message)) {
+    echo "All fields are required!";
+  } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    echo "Invalid email format!";
+  } else {
+    echo "Form submitted successfully!";
+  }
+}
+?>
+
+</body>
+</html>
