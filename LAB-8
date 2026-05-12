@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<form method="post" action="">
+  Select Course:<br>
+  <select name="course">
+    <option value="BSIT">BSIT</option>
+    <option value="BSOA">BSOA</option>
+    <option value="CCS">CCS</option>
+    <option value="AHRT">AHRT</option>
+  </select><br><br>
+
+  <input type="submit">
+</form>
+
+<?php
+if (isset($_POST['course'])) {
+  echo "Selected Course: " . $_POST['course'];
+}
+?>
+
+</body>
+</html>
