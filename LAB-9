@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<form method="post" action="">
+  Message:<br>
+  <textarea name="message" rows="5" cols="30"></textarea><br><br>
+
+  <input type="submit">
+</form>
+
+<?php
+if (isset($_POST['message'])) {
+  echo "Your Message: " . $_POST['message'];
+}
+?>
+
+</body>
+</html>
