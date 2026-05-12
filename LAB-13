@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<form method="post" action="">
+  Username: <input type="text" name="username"><br><br>
+
+  Password: <input type="password" name="password"><br><br>
+
+  <input type="submit">
+</form>
+
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+  $username = htmlspecialchars($_POST['username'] ?? '');
+
+  if (empty($username) || empty($_POST['password'])) {
+    echo "Username and Password are required!";
+  } else {
+    echo "Login successful for user: " . $username;
+    // ❌ Do NOT display password
+  }
+}
+?>
+
+</body>
+</html>
