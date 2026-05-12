@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Student Registration Form</h2>
+
+<form method="post" action="">
+
+Name:
+<input type="text" name="name"
+value="<?php echo $_POST['name'] ?? ''; ?>" required><br><br>
+
+Email:
+<input type="email" name="email"
+value="<?php echo $_POST['email'] ?? ''; ?>" required><br><br>
+
+Gender:<br>
+<input type="radio" name="gender" value="Male" required> Male<br>
+<input type="radio" name="gender" value="Female" required> Female<br><br>
+
+Course:
+<select name="course" required>
+  <option value="">Select Course</option>
+  <option value="BSIT">BSIT</option>
+  <option value="BSOA">BSOA</option>
+  <option value="CCS">CCS</option>
+  <option value="AHRT">AHRT</option>
+</select><br><br>
+
+Hobbies:<br>
+<input type="checkbox" name="hobbies[]" value="Reading"> Reading<br>
+<input type="checkbox" name="hobbies[]" value="Gaming"> Gaming<br>
+<input type="checkbox" name="hobbies[]" value="Sports"> Sports<br><br>
+
+Message:<br>
+<textarea name="message" required><?php echo $_POST['message'] ?? ''; ?></textarea><br><br>
+
+<input type="submit">
+<input type="reset">
+
+</form>
+
+<hr>
+
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+  $name = htmlspecialchars($_POST['name'] ?? '');
+  $email = htmlspecialchars($_POST['email'] ?? '');
+  $gender = $_POST['gender'] ?? '';
+  $course = $_POST['course'] ?? '';
+  $message = htmlspecialchars($_POST['message'] ?? '');
+  $hobbies = $_POST['hobbies'] ?? [];
+
+  if (empty($name) || empty($email) || empty($gender) || empty($course) || empty($message)) {
+    echo "<p style='color:red;'>ERROR: All fields are required!</p>";
+  }
+  elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    echo "<p style='color:red;'>ERROR: Invalid email format!</p>";
+  }
+  else {
+
+    echo "<h3>Registration Successful</h3>";
+
+    echo "Name: " . $name . "<br>";
+    echo "Email: " . $email . "<br>";
+    echo "Gender: " . $gender . "<br>";
+    echo "Course: " . $course . "<br>";
+
+    echo "Hobbies: ";
+    if (!empty($hobbies)) {
+      foreach ($hobbies as $hobby) {
+        echo htmlspecialchars($hobby) . " ";
+      }
+    } else {
+      echo "None";
+    }
+
+    echo "<br>Message: " . $message;
+  }
+}
+?>
+
+</body>
+</html>
