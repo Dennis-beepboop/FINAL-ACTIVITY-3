@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<form method="post" action="">
+  Name: <input type="text" name="name"><br><br>
+
+  Email: <input type="text" name="email"><br><br>
+
+  Gender:<br>
+  <input type="radio" name="gender" value="Male"> Male<br>
+  <input type="radio" name="gender" value="Female"> Female<br><br>
+
+  Course:
+  <select name="course">
+    <option value="">Select Course</option>
+    <option value="BSIT">BSIT</option>
+    <option value="BSOA">BSOA</option>
+    <option value="CCS">CCS</option>
+    <option value="AHRT">AHRT</option>
+  </select><br><br>
+
+  Message:<br>
+  <textarea name="message" rows="5" cols="30"></textarea><br><br>
+
+  <input type="submit">
+</form>
+
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+  $name = htmlspecialchars($_POST['name']);
+  $email = htmlspecialchars($_POST['email']);
+  $gender = $_POST['gender'] ?? "";
+  $course = $_POST['course'];
+  $message = htmlspecialchars($_POST['message']);
+
+  if (empty($name) || empty($email) || empty($gender) || empty($course) || empty($message)) {
+    echo "All fields are required!";
+  } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    echo "Invalid email format!";
+  } else {
+    echo "Name: $name<br>";
+    echo "Email: $email<br>";
+    echo "Gender: $gender<br>";
+    echo "Course: $course<br>";
+    echo "Message: $message<br>";
+  }
+}
+?>
+
+</body>
+</html>
